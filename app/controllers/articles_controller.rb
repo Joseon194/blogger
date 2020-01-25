@@ -20,7 +20,9 @@ include ArticlesHelper
     end
     
     def show
-        @article = Article.find(params[:id])
+        @article = Article.find_by_id(params[:id])
+        @comment = Comment.new
+        @comment.article_id = @article.id
     end
     
 
@@ -44,6 +46,11 @@ include ArticlesHelper
     
         redirect_to article_path(@article)
     end
+end
+
+private
+def article_params
+    params.require(:image).permit(:image)
 end
 
 
